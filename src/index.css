@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+*{
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +12,106 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.filters{
+  background-color: #ccc;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-container{
+  height: 20vh;
+  background-color: #ccc;
+  width: 100%;
+}
+.list-container{
+  height: 70vh;
+}
+form{
+  display: flex;
+  column-gap: 20px;
+  align-items: flex-end;
+  min-height: 100px;
+  width: 90%;
+  justify-content: center;
+}
+.input-field{
+  height: 60px;
+}
+.status-input{
+  display: flex;
+}
+.radio-input{
+  display: flex;
+  column-gap: 20px;
+}
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+label{
+  margin-right: 20px;
+}
+.status-radio{
+  margin-right: 0;
+}
+.control-btns{
+  display: flex;
+  column-gap: 20px;
+}
+button{
+  cursor: pointer;
+}
+.filter-btns{
+  display: flex;
+  column-gap: 20px;
+}
+.error{
+  color: red;
+  font-size: 12px;
+}
+.item-container .data{
+  display: flex;
+  column-gap: 20px;
+}
+.item-container .item{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.item-container{
+  background-color: antiquewhite;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.btns{
+  display: flex;
+  column-gap: 20px;
+}
+.data{
+  min-width: 600px;
+}
+.list-container{
+  overflow-y: auto;
+}
+button{
+  padding: 10px 16px;
+  border-radius: 10px;
+  border:none;
+  background-color: #fff;
+}
+button:hover{
+  background-color: #eee;
+  border: 1px solid #000;
+}
+input,select{
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+}
+input[type=radio]{
+  cursor: pointer;
 }
