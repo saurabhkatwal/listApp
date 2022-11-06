@@ -24,7 +24,7 @@ const Input = ({addItem}) => {
             setIsStatusValid(false);
             return;
         }
-        setIsStatusValid(status);
+        setIsStatusValid(true);
         let obj={
             name,
             dob,
