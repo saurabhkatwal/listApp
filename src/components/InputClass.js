@@ -26,85 +26,47 @@ export default class InputClass extends Component {
         }
         
     }
+    saveOrAddData=(funcArg,text)=>{
+        if (this.state.name.trim() === "") {
+            this.setState({ isNameValid: false });
+            return;
+        }
+        this.setState({ isNameValid: true });
+        if (this.state.dob === "") {
+            this.setState({ isDobValid: false });
+            return;
+        }
+        this.setState({ isDobValid: true })
+        if (this.state.status === "") {
+            this.setState({ isStatusValid: false })
+            return;
+        }
+        this.setState({ isStatusValid: true });
+        let obj = {
+            name: this.state.name,
+            dob: this.state.dob,
+            designation: this.state.designation,
+            status: this.state.status,
+            id: "id" + Math.random().toString().slice(2, 8)
+        }
+    
+        text==="save"?funcArg(obj,this.props.editId):funcArg(obj);
+        this.setState((prevState => {
+            return {
+                ...prevState,
+                name: "",
+                dob: "",
+                designation: "developer",
+                status: ""
+            }
+        }))
+    }
+
+
     submitHandler = (e) => {
         e.preventDefault();
-        if (e.target.innerText.toLowerCase() === "save") {
-            console.log(e.target.parentElement)
-            console.log("save btn clicked")
-            if (this.state.name.trim() === "") {
-                this.setState({ isNameValid: false });
-                return;
-            }
-            this.setState({ isNameValid: true });
-            if (this.state.dob === "") {
-                this.setState({ isDobValid: false });
-                return;
-            }
-            this.setState({ isDobValid: true })
-            if (this.state.status === "") {
-                this.setState({ isStatusValid: false })
-                return;
-            }
-            this.setState({ isStatusValid: true });
-            let obj = {
-                name: this.state.name,
-                dob: this.state.dob,
-                designation: this.state.designation,
-                status: this.state.status,
-                id: "id" + Math.random().toString().slice(2, 8)
-            }
-            this.props.editItemInList(obj, this.props.editId);
-            this.setState((prevState => {
-                return {
-                    ...prevState,
-                    name: "",
-                    dob: "",
-                    designation: "developer",
-                    status: ""
-                }
-            }))
-            console.log("form submitted successfully")
-
-        }
-
-        else if (e.target.innerText.toLowerCase() === 'add') {
-            console.log(e.target);
-            console.log("submit event");
-            if (this.state.name.trim() === "") {
-                this.setState({ isNameValid: false });
-                return;
-            }
-            this.setState({ isNameValid: true });
-            if (this.state.dob === "") {
-                this.setState({ isDobValid: false });
-                return;
-            }
-            this.setState({ isDobValid: true })
-            if (this.state.status === "") {
-                this.setState({ isStatusValid: false })
-                return;
-            }
-            this.setState({ isStatusValid: true });
-            let obj = {
-                name: this.state.name,
-                dob: this.state.dob,
-                designation: this.state.designation,
-                status: this.state.status,
-                id: "id" + Math.random().toString().slice(2, 8)
-            }
-            this.props.addItem(obj);
-            this.setState((prevState => {
-                return {
-                    ...prevState,
-                    name: "",
-                    dob: "",
-                    designation: "developer",
-                    status: ""
-                }
-            }))
-            console.log("form submitted successfully")
-        }
-
+        let text=e.target.innerText.toLowerCase();
+        text==="save"?(this.saveOrAddData(this.props.editItemInList,text)):(this.saveOrAddData(this.props.addItem,text));
     }
 
     inputChangeHandler = (e) => {

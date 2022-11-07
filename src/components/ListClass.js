@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import Item from './Item'
+// import Item from './Item'
+import ItemClass from './ItemClass';
 import { v4 as uuidv4 } from "uuid";
 export default class ListClass extends Component {
 
   render() {
     return (
       <div className="list-container">
-        {this.props.list.map((item, index) => <Item data={item}
+        {this.props.list.map((item, index) => <ItemClass data={item}
           key={uuidv4()}
           id={item.id}
           deleteItem={this.props.deleteItem}
