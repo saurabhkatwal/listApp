@@ -14,15 +14,19 @@ code {
     monospace;
 }
 .filters{
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  width: 74%;
   height: 10vh;
+  margin: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  /* border-bottom: 5px solid #000; */
 }
 .input-container{
   height: 20vh;
-  background-color: #ccc;
+  border-top: 5px solid #000;
+  /* background-color: #ccc; */
   width: 100%;
 }
 .list-container{
@@ -65,9 +69,15 @@ label{
 button{
   cursor: pointer;
 }
+
 .filter-btns{
   display: flex;
   column-gap: 20px;
+  justify-content: flex-end;
+  margin-right: 14px;
+}
+.filter-btns button{
+  background-color: #ccc;
 }
 .error{
   color: red;
@@ -80,12 +90,15 @@ button{
 .item-container .item{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
 }
 .item-container{
   background-color: antiquewhite;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-top:20px;
 }
 .btns{
   display: flex;
@@ -96,6 +109,7 @@ button{
 }
 .list-container{
   overflow-y: auto;
+  border-top: 5px solid #000;
 }
 button{
   padding: 10px 16px;
@@ -114,4 +128,11 @@ input,select{
 }
 input[type=radio]{
   cursor: pointer;
+}
+.control-btns{
+  transform: translateY(-15%);
+}
+.item{
+  width: 75%;
+  margin: auto;
 }
