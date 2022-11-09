@@ -1,11 +1,25 @@
-import { v4 as uuidv4 } from 'uuid';
-import Item from "./Item"
-const List = ({list,deleteItem}) => {
+import React, { Component } from 'react'
+// import Item from './Item'
+import Item from './Item';
+import { v4 as uuidv4 } from "uuid";
+export default class ListClass extends Component {
+
+  render() {
     return (
-        <div className="list-container">
-            {list.map((item,index)=><Item data={item} key={uuidv4()} id={item.id} deleteItem={deleteItem}/>)}
-        </div>
-    );
+      <div className="list-container">
+        {this.props.list.map((item, index) => <Item data={item}
+          key={uuidv4()}
+          id={item.id}
+          deleteItem={this.props.deleteItem}
+          displayForm={this.props.displayForm}
+          openForm={this.props.openForm}
+          closeForm={this.props.closeForm}
+          editId={this.props.editId}
+          btn1ClickHandler={this.props.btn1ClickHandler}
+          editItemInList={this.props.editItemInList}
+          editObj={this.props.editObj}
+        />)}
+      </div>
+    )
+  }
 }
- 
-export default List;

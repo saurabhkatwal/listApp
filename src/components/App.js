@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import FilterClass from './FilterClass';
-import ListClass from './ListClass';
-import InputClass from './InputClass';
+import Filter from './Filter';
+import List from './List';
+import Input from './Input';
 
-export default class AppClass extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,28 +15,45 @@ export default class AppClass extends Component {
       editObj: {}
     }
   }
+  saveStateToLocalStorage = () => {
+    localStorage.setItem("listItems", JSON.stringify(this.state.list));
+  }
+
   componentDidMount() {
     let items = JSON.parse(localStorage.getItem("listItems"));
     if (items) {
       items.length === 0 ? this.setState({ list: [] }) : this.setState({ list: items })
+      window.addEventListener(
+        "beforeunload",
+        this.saveStateToLocalStorage
+      );
+    }
+    else {
+      console.log("in")
+      localStorage.setItem("listItems", JSON.stringify([]))
+      this.setState({ list: [] });
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem("listItems", JSON.stringify(this.state.list));
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage
+    );
   }
+
   addItem = (obj) => {
     console.log(obj);
     const newList = [...this.state.list, obj];
     this.setState({ list: newList });
   }
+
   deleteItem = (id) => {
     this.setState({ list: this.state.list.filter(item => id !== item.id) });
   }
 
   openForm = (id) => {
     const targetObj = this.getEditDataHandler(id);
-    console.log("target object", targetObj)
     this.setState({ displayForm: true, editId: id, editObj: targetObj });
   }
 
@@ -51,8 +68,8 @@ export default class AppClass extends Component {
     return currEdit;
   }
 
-  filterClickHandler = (e, text) => {
-    let newText = text.toLowerCase();
+  filterClickHandler = (e) => {
+    let newText = e.target.innerText.toLowerCase();
     this.setState((prevState) => {
       return {
         ...prevState,
@@ -60,10 +77,12 @@ export default class AppClass extends Component {
       }
     });
   }
+
   filterList = () => {
     let activeButton = this.state.activeButton;
     let list = this.state.list;
-    return (activeButton === 'active' || activeButton === 'inactive') ? (list.filter(item => { return item.status === activeButton })) : (list);
+    return (activeButton === 'all') ?(list):
+      (list.filter(item => { return item.status === activeButton }));
   }
 
   editItemInList = (obj, editId) => {
@@ -77,16 +96,16 @@ export default class AppClass extends Component {
       })
     })
   }
-  
+
   render() {
     return (
       <div className="App">
-        <FilterClass activeButton={this.state.activeButton}
+        <Filter testFn={this.testFn} activeButton={this.state.activeButton}
           activeClickHandler={this.activeClickHandler}
           inactiveClickHandler={this.inactiveClickHandler}
           allClickHandler={this.allClickHandler}
           filterClickHandler={this.filterClickHandler} />
-        <ListClass openForm={this.openForm}
+        <List openForm={this.openForm}
           displayForm={this.state.displayForm}
           list={this.filterList()}
           deleteItem={this.deleteItem}
@@ -96,7 +115,7 @@ export default class AppClass extends Component {
           btn1ClickHandler={this.btn1ClickHandler}
           editItemInList={this.editItemInList}
           editObj={this.state.editObj} />
-        <InputClass edit={false}
+        <Input edit={false}
           addItem={this.addItem}
           btn1Text="Add"
           btn2Text="Reset" />
